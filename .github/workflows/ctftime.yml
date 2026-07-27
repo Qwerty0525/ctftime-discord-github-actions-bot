@@ -12,17 +12,18 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           submodules: true
+          persist-credentials: false
 
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.13'
           cache: 'pip'
           cache-dependency-path: CTFtime-Discord-hooks/requirements.txt
 
-      - uses: actions/cache@v6
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ctftime_cache
           key: ${{ runner.os }}-ctftime-${{ github.run_id }}
@@ -30,7 +31,7 @@ jobs:
 
       - name: Notify
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DiscordWebhookUrl }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORDWEBHOOKURL }}
         run: |
           python -m pip install --upgrade pip
           pip install -r CTFtime-Discord-hooks/requirements.txt
